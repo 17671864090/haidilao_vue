@@ -88,7 +88,6 @@
         </form>
     </div>
 </template>
-
 <script>
     import { payorder } from '../api/apilist'
     export default {
@@ -113,7 +112,6 @@
             },
             async pay(){
                 this.fullscreenLoading = true;
-
                 const data = await payorder(this.$route.params)
                 if(data.status == 1){
                     this.fullscreenLoading = false;

@@ -157,6 +157,12 @@
                             }
                         }
 
+                        this.$notify({
+                            title: '搜索成功',
+                            message: `搜索${this.shop.length}条店铺`,
+                            type: 'success'
+                        });
+
 
 
 
@@ -227,8 +233,7 @@
 
                     })
                 }else{
-                    alert(1)
-
+                    this.getlist()
                 }
             },
             async newapp(){
