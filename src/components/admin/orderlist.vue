@@ -1,0 +1,128 @@
+<template>
+    <div>
+        <el-table
+                :data="tableData.slice((currentPage-1)*PageSize,currentPage*PageSize)"
+                style="width: 100%">
+<!--            <el-table-column-->
+<!--                    label="订单编号"-->
+<!--                    width="200">-->
+<!--                <template slot-scope="scope">-->
+<!--                    <span style="margin-left: 10px">{{ scope.row._id }}</span>-->
+<!--                </template>-->
+<!--            </el-table-column>-->
+            <el-table-column
+                    label="店铺名称"
+                    width="180">
+                <template slot-scope="scope">
+                    <span style="margin-left: 10px">{{ scope.row.data[0].shopname }}</span>
+                </template>
+            </el-table-column>
+            <el-table-column
+                    label="下单时间"
+                    width="180">
+                <template slot-scope="scope">
+                    <span style="margin-left: 10px">{{ scope.row.time }}</span>
+                </template>
+            </el-table-column>
+            <el-table-column
+                    label="下单账号"
+                    width="180">
+                <template slot-scope="scope">
+                    <span style="margin-left: 10px">{{ scope.row.username }}</span>
+
+                </template>
+
+            </el-table-column>
+
+            <el-table-column
+                    label="商品点数"
+                    width="180">
+                <template slot-scope="scope">
+                    <span style="margin-left: 10px">{{ scope.row.price }}</span>
+                </template>
+            </el-table-column>
+            <el-table-column
+                    label="实际付款"
+                    width="180">
+                <template slot-scope="scope">
+                    <span style="margin-left: 10px">{{ scope.row.Agencydiscount }}</span>
+                </template>
+            </el-table-column>
+
+
+            <el-table-column
+                    label="支付状态"
+                    width="180">
+                <template slot-scope="scope">{{ scope.row.paymentstate ==0 ? "未付款" : "已付款" }}</template>
+            </el-table-column>
+
+
+
+
+
+
+
+
+            <el-table-column label="操作">
+                <template slot-scope="scope">
+                    <el-button
+                            size="mini"
+                            @click="editcustomer(scope.$index, scope.row)">编辑</el-button>
+                </template>
+            </el-table-column>
+        </el-table>
+        <el-pagination @size-change="handleSizeChange"
+                       @current-change="handleCurrentChange"
+                       :current-page="currentPage"
+                       :page-size="PageSize" layout="total, sizes, prev, pager, next, jumper"
+                       :total="totalCount">
+        </el-pagination>
+    </div>
+</template>
+<script>
+    import { GetOrder} from "../../api/apilist";
+    export default {
+        name: "customerlist",
+        data(){
+            return {
+                tableData: [],
+                // 总数据
+                // 默认显示第几页
+                currentPage:1,
+                // 总条数，根据接口获取数据长度(注意：这里不能为空)
+                totalCount:null,
+                // 个数选择器（可修改）
+                pageSizes:[1,2,3,4],
+                // 默认每页显示的条数（可修改）
+                PageSize:10,
+            }
+        },
+        mounted(){
+            GetOrder().then((res=>{
+                this.tableData = res.data
+            }))
+        },
+        methods:{
+            // 每页显示的条数
+            handleSizeChange(val) {
+                // 改变每页显示的条数
+                this.PageSize=val
+                // 注意：在改变每页显示的条数时，要将页码显示到第一页
+                this.currentPage=1
+            },
+            // 显示第几页
+            handleCurrentChange(val) {
+                // 改变默认的页数
+                this.currentPage=val
+            },
+            // editcustomer(a,b){
+            //     console.log(a,b)
+            //     this.$router.push({ path: `/admins/editcustomer/${b._id}` })
+            // }
+        }
+    }
+</script>
+
+<style scoped>
+
+</style>
