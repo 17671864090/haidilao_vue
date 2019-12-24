@@ -8,13 +8,13 @@ const router = new Router({
         //     path:"/",
         //     component:resolve=>require(["@/App.vue"],resolve),
         // },
-        {
-            path:"/login",
-            component:resolve=>require(["@/components/Loginvue"],resolve),
-            meta: {
-                title: '登录123122122'
-            }
-        },
+        // {
+        //     path:"/login",
+        //     component:resolve=>require(["@/components/Loginvue"],resolve),
+        //     meta: {
+        //         title: '登录123122122'
+        //     }
+        // },
         {
             path:"/",
                 component:resolve=>require(["@/components/list"],resolve),
