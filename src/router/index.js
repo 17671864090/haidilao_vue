@@ -12,7 +12,7 @@ const router = new Router({
             path:"/login",
             component:resolve=>require(["@/components/Loginvue"],resolve),
             meta: {
-                title: '登录'
+                title: '登录123'
             }
         },
         {
