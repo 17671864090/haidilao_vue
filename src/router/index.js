@@ -99,32 +99,32 @@ const router = new Router({
         },
     ],
 });
-// router.beforeEach((to,from,next)=>{
-//     /* 路由发生变化修改页面title */
-//     if (to.meta.title) {
-//         document.title = to.meta.title;
-//     }
-//     let token = localStorage.getItem('LoginUser');
-//     if (to.meta.requiresAuth) {
-//         if (token) {
-//             next();
-//         } else {
-//             next({
-//                 path: '/login',
-//                 query: { redirect: to.fullPath } // 将刚刚要去的路由path（却无权限）作为参数，方便登录成功后直接跳转到该路由
-//             });
-//         }
-//     } else {
-//         next(); //如果无需token,那么随它去吧
-//     }
-//     if(to.path == '/login'){
-//         if (token) {
-//             next({
-//                 path: '/'
-//             })
-//         }else {
-//             next()
-//         }
-//     }
-// });
+router.beforeEach((to,from,next)=>{
+    /* 路由发生变化修改页面title */
+    if (to.meta.title) {
+        document.title = to.meta.title;
+    }
+    let token = localStorage.getItem('LoginUser');
+    if (to.meta.requiresAuth) {
+        if (token) {
+            next();
+        } else {
+            next({
+                path: '/login',
+                query: { redirect: to.fullPath } // 将刚刚要去的路由path（却无权限）作为参数，方便登录成功后直接跳转到该路由
+            });
+        }
+    } else {
+        next(); //如果无需token,那么随它去吧
+    }
+    if(to.path == '/login'){
+        if (token) {
+            next({
+                path: '/'
+            })
+        }else {
+            next()
+        }
+    }
+});
 export default router
