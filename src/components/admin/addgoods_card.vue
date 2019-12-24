@@ -20,7 +20,7 @@
     </div>
 </template>
 <script>
-    import { getshoplist , addaddgoods } from '../../api/apilist'
+    import { getshoplist , addaddgoods} from '../../api/apilist'
     export default {
         name: "addgoods_card",
         data() {
@@ -61,11 +61,22 @@
                     for (var i = 0; i < arr.length; i++) {
                         data.push(arr[i].split("----"))
                     }
-                    await addaddgoods({data:data,price:this.form.price}).then((res=>{
-                        if(res.code){
-                            this.$message({message:res.msg, type: 'success'});
-                        }
-                    }))
+
+
+                    var result = [];
+                    for(var a=0;a<data.length;a+=50){
+                        result.push(data.slice(a,a+50));
+                    }
+
+                    console.log(result.length)
+
+                    for(var b=0;b<result.length;b++){
+                        await addaddgoods({data:result[b],price:this.form.price}).then((res=>{
+                            if(res.code){
+                                this.$message({message:res.msg, type: 'success'});
+                            }
+                        }))
+                    }
                 }
             }
         }
