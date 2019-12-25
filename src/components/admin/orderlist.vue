@@ -3,25 +3,18 @@
         <el-table
                 :data="tableData.slice((currentPage-1)*PageSize,currentPage*PageSize)"
                 style="width: 100%">
-<!--            <el-table-column-->
-<!--                    label="订单编号"-->
-<!--                    width="200">-->
-<!--                <template slot-scope="scope">-->
-<!--                    <span style="margin-left: 10px">{{ scope.row._id }}</span>-->
-<!--                </template>-->
-<!--            </el-table-column>-->
             <el-table-column
                     label="店铺名称"
-                    width="180">
+                    width="200">
                 <template slot-scope="scope">
                     <span style="margin-left: 10px">{{ scope.row.data[0].shopname }}</span>
                 </template>
             </el-table-column>
             <el-table-column
                     label="下单时间"
-                    width="180">
+                    width="200">
                 <template slot-scope="scope">
-                    <span style="margin-left: 10px">{{ scope.row.time }}</span>
+                    <span style="margin-left: 10px">{{ scope.row.creationtime }}</span>
                 </template>
             </el-table-column>
             <el-table-column
@@ -29,40 +22,52 @@
                     width="180">
                 <template slot-scope="scope">
                     <span style="margin-left: 10px">{{ scope.row.username }}</span>
-
                 </template>
-
             </el-table-column>
-
             <el-table-column
                     label="商品点数"
-                    width="180">
+                    width="50">
                 <template slot-scope="scope">
                     <span style="margin-left: 10px">{{ scope.row.price }}</span>
                 </template>
             </el-table-column>
             <el-table-column
                     label="实际付款"
-                    width="180">
+                    width="50">
                 <template slot-scope="scope">
-                    <span style="margin-left: 10px">{{ scope.row.Agencydiscount }}</span>
+                    <span style="margin-left: 10px">{{ scope.row.Actualdeduction }}</span>
                 </template>
             </el-table-column>
-
-
             <el-table-column
                     label="支付状态"
-                    width="180">
+                    width="50">
+                <template slot-scope="scope">{{ scope.row.paymentstate ==0 ? "未付款" : "已付款" }}</template>
+            </el-table-column>
+
+            <el-table-column
+                    label="详情"
+                    width="100">
                 <template slot-scope="scope">{{ scope.row.paymentstate ==0 ? "未付款" : "已付款" }}</template>
             </el-table-column>
 
 
+            <el-table-column
+                    label="店铺"
+                    width="380">
+                <template slot-scope="scope">{{scope.row.data[0].date[0]  + "-" + scope.row.data[0].date[1] + "-" + scope.row.data[0].date[3]  + "-" + scope.row.data[0].date[4]  + "-" + scope.row.data[0].date[2]+"号" }}</template>
+            </el-table-column>
 
 
 
 
 
-
+            <el-table-column
+                    label="备注"
+                    width="100">
+                <template slot-scope="scope">
+                    <span style="margin-left: 10px">{{ scope.row.Remarks }}</span>
+                </template>
+            </el-table-column>
             <el-table-column label="操作">
                 <template slot-scope="scope">
                     <el-button
@@ -74,6 +79,8 @@
         <el-pagination @size-change="handleSizeChange"
                        @current-change="handleCurrentChange"
                        :current-page="currentPage"
+                       :page-sizes="[100, 200, 500, 1000]"
+
                        :page-size="PageSize" layout="total, sizes, prev, pager, next, jumper"
                        :total="totalCount">
         </el-pagination>

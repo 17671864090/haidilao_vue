@@ -51,6 +51,11 @@
     font-weight: bold;
     color: rgba(247,66,111,1);">
             {{User.Agencydiscount / 10}}折</span></p>
+
+
+
+
+
         <div class="pay_bottom" style="
 
     bottom:44px;
@@ -66,6 +71,10 @@
             <p style="width: 100%;float: left;line-height: 44px;padding-left: 10px;font-size: 12px;">商品原价： <span class="pay_all tprice" style="font-size: 18px;
     font-weight: bold;
     color: rgba(247,66,111,1);">{{price}}元</span></p>
+
+            <el-button @click="Signout">退出账户</el-button>
+
+
 
             <el-button style="width: 100%;overflow: hidden;margin: 0 auto;border-radius: 5px;height: 44px;
 
@@ -131,6 +140,11 @@
             this.getlist()
         },
         methods:{
+            Signout(){
+                localStorage.removeItem('LoginUser')
+                location.reload()            },
+
+
             openFullScreen1() {
                 this.fullscreenLoading = true;
                 setTimeout(() => {
@@ -188,8 +202,14 @@
             },
             // 监听选择店铺后
             async app(){
+
+                this.fullscreenLoading = true;
+
+
                 await getgoodslist({shopnamee:this.from.shopname}).then((res)=>{
-                        `001 已被下单的`
+                    this.fullscreenLoading = false;
+
+                    `001 已被下单的`
                         if(res.code == "001"){
                             this.fullscreenLoading = false;
                             this.shoptableXing = []
@@ -237,10 +257,13 @@
                 }
             },
             async newapp(){
+                this.fullscreenLoading = true;
                 await getgoodslist(this.from).then((res)=>{
-                        if(res.code == "001"){
+                    this.fullscreenLoading = false;
+                    if(res.code == "001"){
                             this.from.shoptableXing = []
                             this.shoptableXing = []
+                            this.fullscreenLoading = true;
                         }else{
                             for(let i=0;i<res.data.length;i++){
                                 if(this.shoptableXing.indexOf(res.data[i].tableXing) !== -1){
@@ -249,6 +272,7 @@
                                     this.shoptableXing.push(res.data[i].tableXing)
                                 }
                             }
+                            this.fullscreenLoading = false;
 
                             res.data.sort(function (a,b) {
                                 var value1 = a.numbber;
