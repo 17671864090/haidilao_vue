@@ -59,11 +59,12 @@
         </el-pagination>
         <div style="margin-top: 20px">
             <el-button @click="setCurrent()">删除</el-button>
+            <el-button @click="AllsetCurrent()">一键删除</el-button>
         </div>
     </div>
 </template>
 <script>
-    import { getgoodslist , removeshop } from '../../api/apilist'
+    import { getgoodslist , removeshop , AllDeleteKalman } from '../../api/apilist'
     export default {
         name: "goods_card",
         data() {
@@ -133,6 +134,9 @@
                         this.$message({message:res.msg, type: 'success'});
                     }
                 }))
+            },
+            async AllsetCurrent(){
+                await AllDeleteKalman()
             }
 
         }

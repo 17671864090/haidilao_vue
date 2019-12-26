@@ -49,18 +49,11 @@
                     width="100">
                 <template slot-scope="scope">{{ scope.row.paymentstate ==0 ? "未付款" : "已付款" }}</template>
             </el-table-column>
-
-
             <el-table-column
                     label="店铺"
                     width="380">
                 <template slot-scope="scope">{{scope.row.data[0].date[0]  + "-" + scope.row.data[0].date[1] + "-" + scope.row.data[0].date[3]  + "-" + scope.row.data[0].date[4]  + "-" + scope.row.data[0].date[2]+"号" }}</template>
             </el-table-column>
-
-
-
-
-
             <el-table-column
                     label="备注"
                     width="100">
@@ -80,14 +73,16 @@
                        @current-change="handleCurrentChange"
                        :current-page="currentPage"
                        :page-sizes="[100, 200, 500, 1000]"
-
                        :page-size="PageSize" layout="total, sizes, prev, pager, next, jumper"
                        :total="totalCount">
         </el-pagination>
+        <div style="margin-top: 20px">
+            <el-button @click="AllsetCurrent()">一键删除</el-button>
+        </div>
     </div>
 </template>
 <script>
-    import { GetOrder} from "../../api/apilist";
+    import {GetOrder, AllDeleteOrder} from "../../api/apilist";
     export default {
         name: "customerlist",
         data(){
@@ -126,6 +121,9 @@
             //     console.log(a,b)
             //     this.$router.push({ path: `/admins/editcustomer/${b._id}` })
             // }
+            async AllsetCurrent(){
+                await AllDeleteOrder()
+            }
         }
     }
 </script>

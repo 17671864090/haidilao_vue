@@ -41,8 +41,7 @@
     font-weight: bold;
     ">{{User.user_name}}</span></p>
 
-        <p style="width: 100%;float: left;line-height: 44px;padding-left: 10px;font-size: 12px;">当前剩余余额： <span class="pay_all tprice"
-                                                                                                               style="font-size: 18px;
+        <p style="width: 100%;float: left;line-height: 44px;padding-left: 10px;font-size: 12px;">当前剩余余额： <span class="pay_all tprice"  style="font-size: 18px;
     font-weight: bold;
     color: rgba(247,66,111,1);">
             {{User.balance}}元</span></p>
@@ -51,8 +50,6 @@
     font-weight: bold;
     color: rgba(247,66,111,1);">
             {{User.Agencydiscount / 10}}折</span></p>
-
-
 
 
 

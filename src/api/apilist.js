@@ -28,3 +28,12 @@ export const getUserinfo = data =>post('/api/v3/getUserinfo',data);
 export const getgoodslistname = data =>post('/api/v1/getgoodslistname',data);
 
 export const delect = data =>post('/api/v3/delect',data);
+
+
+
+
+
+export const AllDeleteKalman = data =>post('/api/v3/AllDeleteKalman',data);  //删除全部卡密
+export const AllDeleteOrder = data =>post('/api/v3/AllDeleteOrder',data);
+
+
