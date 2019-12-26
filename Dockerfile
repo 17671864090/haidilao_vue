@@ -15,6 +15,6 @@ RUN npm run build
 
 # production stage
 FROM nginx
-COPY --from=build-stage /app/dist /usr/share/nginx/html
+COPY --from=build-stage /dist /usr/share/nginx/html
 RUN echo '执行完毕'
 
