@@ -1,6 +1,5 @@
 <template>
     <div>
-
         <el-menu
                 class="el-menu-demo"
                 mode="horizontal"
@@ -10,7 +9,7 @@
             <el-menu-item index="1">后台管理系统</el-menu-item>
         </el-menu>
         <el-row>
-            <el-col :span="4"><div class="grid-content bg-purple">
+            <el-col :span="3"><div class="grid-content bg-purple">
                 <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
                     <el-radio-button :label="false">展开</el-radio-button>
                     <el-radio-button :label="true">收起</el-radio-button>

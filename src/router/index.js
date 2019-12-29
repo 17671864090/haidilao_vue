@@ -4,15 +4,11 @@ Vue.use(Router);
 const router = new Router({
     mode: 'history',
     routes:[
-        // {
-        //     path:"/",
-        //     component:resolve=>require(["@/App.vue"],resolve),
-        // },
         {
             path:"/login",
             component:resolve=>require(["@/components/Loginvue"],resolve),
             meta: {
-                title: '---登录---'
+                title: 'kk工作室海底捞登录 - 欢迎登录kk工作室海底捞服务'
             }
         },
         {
@@ -20,10 +16,20 @@ const router = new Router({
                 component:resolve=>require(["@/components/list"],resolve),
             meta: {
                 requiresAuth: true,
-                title: '海底捞提卡平台'
+                title: 'kk海底捞服务工作室 全国海底捞插队 海底捞排号 排队号 免排队 免预约 69折 30优惠券'
             }
-
         },
+
+        //订单查询
+        {
+            path:"/queryOrderlist",
+            component:resolve=>require(["@/components/queryOrderlist"],resolve),
+            meta: {
+                title: '订单查询 - kk海底捞服务工作室 全国海底捞插队 海底捞排号 排队号 免排队 免预约 69折 30优惠券'
+            }
+        },
+
+
         {
             path:"/home",
             component:resolve=>require(["@/components/list"],resolve),

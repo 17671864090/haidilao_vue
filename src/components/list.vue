@@ -1,9 +1,14 @@
 <template>
     <div>
         <div class="top">
-            <div style="height: 200px;background:url(https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3462250608,2257798544&fm=26&gp=0.jpg);background-size: 100% 100%;"></div>
+            <div class="img"></div>
         </div>
-        <div style="margin-top: 40px">
+        <el-alert
+                title="商家公告"
+                type="success"
+                description="账号点数充值，折扣修改，购买疑问，以及需要安排的店铺店内没有的，请联系客服yzb18357813020">
+        </el-alert>
+        <div style="margin-top: 10px">
             <div class="seller_form">
                 <ul>
                     <li style="display: flex">
@@ -15,67 +20,61 @@
                     <li style="width: 100%">
                         <span style="color: rgba(83,91,127,0.6);font-size: 12px" class="form_title">店铺</span>
                         <select v-model="from.shopname" class="xr" style="width:70%">
+                            <option style="display:none" value="" disabled>请选择</option>
+
                             <option  v-for="(item) in shop" :key="item.index" style="text-align: right" :value="item">{{item}}</option>
                         </select>
                     </li>
                     <li class="xx">
                         <span style="color: rgba(83,91,127,0.6);font-size: 12px" class="form_title">卓型</span>
                         <select  v-model="from.shoptableXing" class="xr">
+                            <option style="display:none" value="" disabled>请选择</option>
                             <option  v-for="(item) in shoptableXing" :key="item.index" style="text-align: right" :value="item">{{item}}</option>
                         </select>
                     </li>
                     <li class="xx">
                         <span style="color: rgba(83,91,127,0.6);font-size: 12px" class="form_title">座位</span>
                         <select v-model="from.form" class="xr">
+                            <option style="display:none" value="" disabled>请选择</option>
+
                             <option  v-for="(item) in data2" :key="item.index" style="text-align: right" :value="item">{{item.numbber + '号' + item.tableXing}}</option>
                         </select>
                     </li>
                 </ul>
             </div>
         </div>
-
-        <div style="height: 10px;background-color: #F9F9F9"> </div>
-
-
-        <p style="width: 100%;float: left;line-height: 44px;padding-left: 10px;font-size: 12px;">当前登录账号： <span class="pay_all tprice" style="font-size: 14px;
+        <div style="overflow: hidden">
+            <p style="width: 100%;float: left;line-height: 44px;padding-left: 10px;font-size: 12px;">当前登录账号： <span class="pay_all tprice" style="font-size: 14px;
     font-weight: bold;
     ">{{User.user_name}}</span></p>
-
-        <p style="width: 100%;float: left;line-height: 44px;padding-left: 10px;font-size: 12px;">当前剩余余额： <span class="pay_all tprice"  style="font-size: 18px;
+            <p style="width: 100%;float: left;line-height: 44px;padding-left: 10px;font-size: 12px;">当前剩余余额： <span class="pay_all tprice"  style="font-size: 18px;
     font-weight: bold;
     color: rgba(247,66,111,1);">
             {{User.balance}}元</span></p>
-
-        <p style="width: 100%;float: left;line-height: 44px;padding-left: 10px;font-size: 12px;">当前折扣： <span class="pay_all tprice" style="font-size: 18px;
+            <p style="width: 100%;float: left;line-height: 44px;padding-left: 10px;font-size: 12px;">当前折扣： <span class="pay_all tprice" style="font-size: 18px;
     font-weight: bold;
     color: rgba(247,66,111,1);">
             {{User.Agencydiscount / 10}}折</span></p>
-
-
-
+        </div>
         <div class="pay_bottom" style="
-
+        padding: 10px 0;
     bottom:44px;
     width: 100%;
-    height: 44px;
     line-height: 44px;
-    border-top: 1px solid #e9eef1;
-    background: #fff;">
-                <p style="width: 100%;float: left;line-height: 44px;padding-left: 10px;font-size: 12px;">实际付款： <span class="pay_all tprice" style="font-size: 18px;
+    background: #fff;margin-bottom: 44px">
+            <p style="width: 100%;float: left;line-height: 44px;padding-left: 10px;font-size: 12px;">实际付款：
+                <span class="pay_all tprice" style="font-size: 18px;
     font-weight: bold;
     color: rgba(247,66,111,1);">{{price * User.Agencydiscount / 100}}元</span></p>
-
-            <p style="width: 100%;float: left;line-height: 44px;padding-left: 10px;font-size: 12px;">商品原价： <span class="pay_all tprice" style="font-size: 18px;
+            <p style="width: 100%;float: left;line-height: 44px;padding-left: 10px;font-size: 12px;">商品原价：
+                <span class="pay_all tprice" style="font-size: 18px;
     font-weight: bold;
     color: rgba(247,66,111,1);">{{price}}元</span></p>
+            <el-button style="margin-left: 10px" @click="Signout">退出账户</el-button>
+<!--            <el-button style="margin-left: 10px" @click="Signout">订单查询(待开发)</el-button>-->
 
-            <el-button @click="Signout">退出账户</el-button>
-
-
-
-            <el-button style="width: 100%;overflow: hidden;margin: 0 auto;border-radius: 5px;height: 44px;
-
-
+        </div>
+        <el-button style="width: 100%;overflow: hidden;margin: 0 auto;border-radius: 5px;height: 44px;
     font-size: 14px;
     float: right;
     border: none;
@@ -83,14 +82,10 @@
     background: #648ff7;
     position: fixed;left: 0;right: 0;bottom: 0;
 "
-                    type="primary"
-                    @click="pay"
-                    v-loading.fullscreen.lock="fullscreenLoading">提交订单
-
-            </el-button>
-
-
-        </div>
+                   type="primary"
+                   @click="pay"
+                   v-loading.fullscreen.lock="fullscreenLoading">提交订单
+        </el-button>
     </div>
 </template>
 <script>
@@ -167,16 +162,11 @@
                                 this.shop.push(res.data[i].shopname)
                             }
                         }
-
                         this.$notify({
                             title: '搜索成功',
                             message: `搜索${this.shop.length}条店铺`,
                             type: 'success'
                         });
-
-
-
-
                     }
                 })
             },
@@ -199,10 +189,7 @@
             },
             // 监听选择店铺后
             async app(){
-
                 this.fullscreenLoading = true;
-
-
                 await getgoodslist({shopnamee:this.from.shopname}).then((res)=>{
                     this.fullscreenLoading = false;
 
@@ -299,6 +286,14 @@
     }
 </script>
 <style lang="stylus" scoped>
+    .top{
+        .img{
+            height: 200px;
+            background:url(../../public/logo.jpg);
+            background-size: 100% 100%;
+        }
+
+    }
     .seller_form{
         width: 100%;
         margin: 12px auto;
@@ -335,49 +330,3 @@
     }
 
 </style>
-<!--                    <li class="xx" style="height: auto;display: flex">-->
-<!--                        <img src="https://www.yuekapu.com/static/img/9.png" alt="" style="    margin-top: 7px;    height: 20px;-->
-<!--    width: 20px;-->
-<!--    display: inline-block;-->
-<!--    margin-right: 10px;">-->
-<!--                        <div>-->
-<!--                            <span style="color: rgba(83,91,127,0.6);padding-right: 20px" class="form_title">商品备注</span>-->
-
-<!--                        </div>-->
-
-<!--                    </li>-->
-<!--                    <div class="spdj xr"  style="color: rgba(83,91,127,0.6);   padding: 20px ;-->
-<!--text-align: justify;-->
-<!--text-justify: newspaper;-->
-<!--word-break: break-all;">-->
-<!--                        商品购买后直接到店铺11111111111111111111111111111111111111111111111111111111-->
-<!--                    </div>-->
-<!--        <div class="payments" style="width: 94%;margin: 12px auto 0 auto;">-->
-<!--            <span class="form_title" style="margin-bottom: 4px;font-size: 16px;color: #333">请选择支付方式 <span style="display:inline-block;font-size: 18px;color: rgba(83,91,127,0.6);padding-left: 10px">pay</span></span>-->
-<!--            <input type="hidden" name="feePayer" value="1">-->
-<!--            <input type="hidden" name="fee_rate" value="0.025">-->
-<!--            <input type="hidden" name="min_fee" value="0.1">-->
-<!--            <ul style="width: 100%;padding: 10px 10%;display: flex;flex-wrap: wrap;justify-content: space-around;box-sizing: border-box">-->
-<!--                &lt;!&ndash; 0 &ndash;&gt;-->
-<!--                &lt;!&ndash;&ndash;&gt;-->
-<!--                &lt;!&ndash;&ndash;&gt;-->
-<!--                <li onclick="javascript:setFeeRate('0.025')" style="    height: 44px;width: 46%;border:1px solid rgba(83,91,127,0.06)">-->
-<!--                    <img src="https://www.yuekapu.com/static/app/images/icon_zfb.jpg" alt="">-->
-<!--                    <span class="pay_choose"> </span>-->
-<!--                    &lt;!&ndash;&ndash;&gt;-->
-<!--                    <input name="pid" data-target="1" value="2" type="radio" checked="checked">-->
-<!--                    &lt;!&ndash;&ndash;&gt;-->
-<!--                </li>-->
-<!--                &lt;!&ndash; 0 &ndash;&gt;-->
-<!--                &lt;!&ndash;&ndash;&gt;-->
-<!--                &lt;!&ndash;&ndash;&gt;-->
-<!--                &lt;!&ndash;&ndash;&gt;-->
-<!--                <li onclick="javascript:setFeeRate('0.025')" style="width: 46%;border:1px solid rgba(83,91,127,0.06)">-->
-<!--                    <img src="https://www.yuekapu.com/static/app/images/icon_wx.jpg" alt="">-->
-<!--                    <span class=""> </span>-->
-<!--                    &lt;!&ndash;&ndash;&gt;-->
-<!--                    <input name="pid" data-target="1" value="146" type="radio">-->
-<!--                    &lt;!&ndash;&ndash;&gt;-->
-<!--                </li>-->
-<!--            </ul>-->
-<!--        </div>-->

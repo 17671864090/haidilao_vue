@@ -1,52 +1,72 @@
 <template>
     <div>
-        <el-table
-                :data="tableData.slice((currentPage-1)*PageSize,currentPage*PageSize)"
-                style="width: 100%">
+        <el-table size="mini"
+                :data="tableData.slice((currentPage-1)*PageSize,currentPage*PageSize).filter(tableData => !search || tableData.username.toLowerCase().includes(search.toLowerCase()))"
+                style="width: 100%"
+                  :default-sort = "{prop: 'creationtime', order: 'descending'}"
+
+        >
             <el-table-column
                     label="店铺名称"
-                    width="200">
+                    width="180">
                 <template slot-scope="scope">
                     <span style="margin-left: 10px">{{ scope.row.data[0].shopname }}</span>
                 </template>
             </el-table-column>
+<!--            <el-table-column-->
+<!--                    label="下单时间"-->
+<!--                    sortable-->
+<!--                    width="200">-->
+<!--                <template slot-scope="scope">-->
+<!--                    <span style="margin-left: 10px">{{ scope.row.creationtime }}</span>-->
+<!--                </template>-->
+<!--            </el-table-column>-->
+
+
+
+
+
+
             <el-table-column
-                    label="下单时间"
-                    width="200">
-                <template slot-scope="scope">
-                    <span style="margin-left: 10px">{{ scope.row.creationtime }}</span>
-                </template>
+                    prop="creationtime"
+                    label="日期"
+                    sortable
+                    width="180">
             </el-table-column>
+
+
+
+
+
+
+
+
+
+
             <el-table-column
                     label="下单账号"
-                    width="180">
+                    width="150">
                 <template slot-scope="scope">
                     <span style="margin-left: 10px">{{ scope.row.username }}</span>
                 </template>
             </el-table-column>
             <el-table-column
                     label="商品点数"
-                    width="50">
+                    width="100">
                 <template slot-scope="scope">
                     <span style="margin-left: 10px">{{ scope.row.price }}</span>
                 </template>
             </el-table-column>
             <el-table-column
                     label="实际付款"
-                    width="50">
+                    width="100">
                 <template slot-scope="scope">
                     <span style="margin-left: 10px">{{ scope.row.Actualdeduction }}</span>
                 </template>
             </el-table-column>
             <el-table-column
                     label="支付状态"
-                    width="50">
-                <template slot-scope="scope">{{ scope.row.paymentstate ==0 ? "未付款" : "已付款" }}</template>
-            </el-table-column>
-
-            <el-table-column
-                    label="详情"
-                    width="100">
+                    width="80">
                 <template slot-scope="scope">{{ scope.row.paymentstate ==0 ? "未付款" : "已付款" }}</template>
             </el-table-column>
             <el-table-column
@@ -56,18 +76,33 @@
             </el-table-column>
             <el-table-column
                     label="备注"
-                    width="100">
+                    width="200">
                 <template slot-scope="scope">
                     <span style="margin-left: 10px">{{ scope.row.Remarks }}</span>
                 </template>
             </el-table-column>
-            <el-table-column label="操作">
-                <template slot-scope="scope">
-                    <el-button
+<!--            <el-table-column label="操作">-->
+<!--                <template slot-scope="scope">-->
+<!--                    <el-button-->
+<!--                            size="mini"-->
+<!--                            @click="editcustomer(scope.$index, scope.row)">编辑</el-button>-->
+<!--                </template>-->
+<!--            </el-table-column>-->
+
+
+            <el-table-column align="right" width="200">
+                <template slot="header" slot-scope="scope" >
+                    <el-input
+                            v-model="search"
                             size="mini"
-                            @click="editcustomer(scope.$index, scope.row)">编辑</el-button>
+                            @click="app(scope)"
+                            placeholder="输入账号搜索"/>
                 </template>
+
             </el-table-column>
+
+
+
         </el-table>
         <el-pagination @size-change="handleSizeChange"
                        @current-change="handleCurrentChange"
@@ -96,7 +131,9 @@
                 // 个数选择器（可修改）
                 pageSizes:[1,2,3,4],
                 // 默认每页显示的条数（可修改）
-                PageSize:10,
+                PageSize:15,
+
+                search:null
             }
         },
         mounted(){

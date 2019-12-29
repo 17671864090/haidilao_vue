@@ -7,8 +7,14 @@
             <el-form-item label="客户密码">
                 <el-input v-model="tableData.password"></el-input>
             </el-form-item>
-            <el-form-item label="点数">
-                <el-input v-model="tableData.balance"></el-input>
+            <el-form-item label="当前点数">
+                <el-input v-model="tableData.balance" disabled="true"></el-input>
+                <el-input
+                        placeholder="请输入需要增加的点数"
+                        type="Number"
+                        v-model="tableData.Addbalance"
+                        clearable>
+                </el-input>
             </el-form-item>
             <el-form-item label="折扣">
                 <el-input v-model="tableData.Agencydiscount"></el-input>
