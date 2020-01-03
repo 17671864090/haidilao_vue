@@ -6,7 +6,7 @@ const router = new Router({
     routes:[
         {
             path:"/login",
-            component:resolve=>require(["@/components/Loginvue"],resolve),
+            component:()=>import('@/components/Loginvue'),
             meta: {
                 title: 'kk工作室海底捞登录 - 欢迎登录kk工作室海底捞服务'
             }
@@ -23,7 +23,8 @@ const router = new Router({
         //订单查询
         {
             path:"/queryOrderlist",
-            component:resolve=>require(["@/components/queryOrderlist"],resolve),
+            component:()=>import('@/components/queryOrderlist'),
+
             meta: {
                 title: '订单查询 - kk海底捞服务工作室 全国海底捞插队 海底捞排号 排队号 免排队 免预约 69折 30优惠券'
             }
@@ -40,13 +41,13 @@ const router = new Router({
         },
         {
             path:"/links/order/:id",
-            component:resolve=>require(["@/components/listorder"],resolve),
+            component:()=>import('@/components/listorder'),
             meta: { requiresAuth: true }
 
         },
         {
             path:"/links/orderquery/:id",
-            component:resolve=>require(["@/components/orderquery"],resolve),
+            component:()=>import('@/components/orderquery'),
             meta: {
                 requiresAuth: true,
                 title: '订单查询'

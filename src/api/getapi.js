@@ -30,7 +30,7 @@ axios.interceptors.response.use(
                 case 403:
                     localStorage.removeItem('LoginUser')
                     // alert(response.data.msg)
-                    this.$router.push({path:'/login'})
+                    // this.$router.push({path:'/login'})
             }
         }
         return response

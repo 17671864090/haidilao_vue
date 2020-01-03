@@ -18,7 +18,7 @@ export const updateUser = data =>post('/api/v3/updateUser',data);
 export const PlaceOrder = data =>post('/api/v3/PlaceOrder',data);
 export const payorder = data =>post('/api/v3/payorder',data);
 export const GetOrder = data =>post('/api/v3/GetOrder',data);
-export const login = data =>post('/api/v3/login',data);
+export const login = data =>post('/api/v1/login',data);
 
 
 export const getgoodslistall = data =>post('/api/v1/getgoodslistall',data);

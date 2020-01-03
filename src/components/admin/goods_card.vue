@@ -14,7 +14,7 @@
             </el-table-column>
             <el-table-column
                     label="店铺名称"
-                    width="120">
+                    width="220">
                 <template slot-scope="scope">{{ scope.row.shopname }}</template>
             </el-table-column>
             <el-table-column
@@ -39,7 +39,7 @@
             </el-table-column>
             <el-table-column
                     label="卡密"
-                    width="420">
+                    width="520">
                 <template slot-scope="scope">{{ scope.row.date   }}</template>
             </el-table-column>
             <el-table-column width="320">

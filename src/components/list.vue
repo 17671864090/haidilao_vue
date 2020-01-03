@@ -12,7 +12,7 @@
             <div class="seller_form">
                 <ul>
                     <li style="display: flex">
-                        <van-search style="width: 90%" placeholder="搜索相关店铺 如:武汉" v-model="from.shopname" />
+                        <van-search style="width: 90%" placeholder="搜索相关店铺 如:武汉" v-model="shopname" />
                         <div style="float: right;">
                             <el-button icon="el-icon-search" @click="newaapp" circle></el-button>
                         </div>
@@ -97,6 +97,7 @@
                 shop:[],
                 shoptableXing:[],
                 shopnumbber:[],
+                shopname:null,
                 data:{
                     shopname:null
                 },
@@ -117,8 +118,8 @@
                 User:{
                     balance:null,
                     Agencydiscount:null
-                }
-
+                },
+                value:null
             }
         },
         mounted() {
@@ -218,6 +219,7 @@
             },
             async newaapp(){
                 this.fullscreenLoading = true;
+                this.from.shopname = this.shopname
                 if(this.from.shopname){
                     await getgoodslistname({shopnamee:this.from.shopname}).then((res)=>{
                         this.fullscreenLoading = false;
@@ -268,6 +270,7 @@
                 })
             },
             async asa(){
+
                 this.price = this.from.form.price
             }
         },
@@ -310,9 +313,7 @@
                 margin-right: 10px;
             }
             select {
-
                 color: rgba(83,91,127,0.6);
-
                 font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Noto Sans CJK SC,WenQuanYi Micro Hei,Arial,sans-serif;
                 border: none;
                 background: none;
@@ -321,8 +322,6 @@
                 height: 100%;
                 font-size: 12px;
                 color: #33334f;
-
-
                 width:calc(93% - 72px);margin-left: 3%;text-align: right;appearance:none;-moz-appearance:none;-webkit-appearance:none;
 
             }
