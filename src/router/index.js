@@ -7,10 +7,14 @@ const router = new Router({
         {
             path:"/login",
             component:()=>import('@/components/Loginvue'),
-            meta: {
-                title: 'kk工作室海底捞登录 - 欢迎登录kk工作室海底捞服务'
-            }
+            meta: {title: 'kk工作室海底捞登录 - 欢迎登录kk工作室海底捞服务'}
         },
+
+
+
+
+
+
         {
             path:"/",
                 component:resolve=>require(["@/components/list"],resolve),
@@ -53,6 +57,22 @@ const router = new Router({
                 title: '订单查询'
             }
         },
+
+
+
+        {
+            path:"/getYZM",
+            component:()=>import('@/components/YZM/yzm.vue'),
+            meta: {
+                title: '验证码查询'
+            }
+        },
+
+
+
+
+
+
         // 后台管理入口
         {
                 path:"/admins",
@@ -96,6 +116,29 @@ const router = new Router({
                     component:resolve=>require(["@/components/admin/goods_card"],resolve),
                     meta: { requiresAuth: true }
                 },
+                // 卡密管理
+                {
+                    path:"/admins/yzm_card",
+                    component:resolve=>require(["@/components/admin/yzm_card"],resolve),
+                    meta: { requiresAuth: true }
+                },
+
+
+                {
+                    path:"/admins/addYzm_card",
+                    component:resolve=>require(["@/components/admin/addYzm_card"],resolve),
+                    meta: { requiresAuth: true }
+                },
+
+                {
+                    path:"/admins/yzm_token",
+                    component:resolve=>require(["@/components/admin/Yzm_token"],resolve),
+                    meta: { requiresAuth: true }
+                },
+
+
+
+
                 // 添加卡密
                 {
                     path:"/admins/addgoods_card",

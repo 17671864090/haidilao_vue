@@ -43,6 +43,20 @@
                             </el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
+                    <el-submenu index="3">
+                        <template slot="title">
+                            <i class="el-icon-location"></i>
+                            <span slot="title">验证码管理</span>
+                        </template>
+                        <el-menu-item-group>
+                            <el-menu-item index="3-1">
+                                <router-link to="/admins/yzm_card">获取当前可用号码</router-link>
+                            </el-menu-item>
+                            <el-menu-item index="3-2">
+                                <router-link to="/admins/Yzm_token">添加授权码</router-link>
+                            </el-menu-item>
+                        </el-menu-item-group>
+                    </el-submenu>
                 </el-menu>
             </div></el-col>
             <el-col style="padding-top: 10px" :span="20"><div class="grid-content bg-purple-light">

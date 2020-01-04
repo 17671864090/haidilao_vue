@@ -37,3 +37,26 @@ export const AllDeleteKalman = data =>post('/api/v3/AllDeleteKalman',data);  //�
 export const AllDeleteOrder = data =>post('/api/v3/AllDeleteOrder',data);
 
 
+
+
+
+export const binding = data =>post('/api/v_yzm/binding',data);  //指定号码
+
+export const GetHM2Str = data =>post('/api/v_yzm/GetHM2Str',data);  //指定号码
+
+
+export const mkHM2Strr = data =>post('/api/v_yzm/mkHM2Str',data);  //指定号码
+export const GetYzm2Str = data =>post('/api/v_yzm/GetYzm2Str',data);  //获取验证码
+
+export const GetHM2StrAll = data =>post('/api/v_yzm/GetHM2StrAll',data);  //获取全部手机号
+
+
+export const addYZM = data =>post('/api/v_yzm/add',data);  //获取全部手机号
+
+
+export const addYZMCODE = data =>post('/api/v_yzm/addYZMCODE',data);  //获取全部手机号
+
+
+
+
+
