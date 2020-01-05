@@ -124,3 +124,34 @@
     }
 
 </style>
+
+
+
+
+
+
+
+
+<!--2020-01-05 14:28:21:2020/01/05 06:28:21 [error] 6#6: *7 rewrite or internal redirection cycle while internally redirecting to "/index.html", client: 171.43.237.76, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "60.205.178.222:5423", referrer: "http://60.205.178.222:5423/"-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
