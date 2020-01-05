@@ -48,11 +48,16 @@
                 }, 5000);
             },
             async getNubber(){
-                window.clearInterval(this.startInterval1)
 
+
+                window.clearInterval(this.startInterval1)
                 //检测token是否正确
                 GetHM2Str({token:this.value}).then((res=>{
                     if(res.code == 200){
+                        Toast('获取成功');
+
+                        this.fullscreenLoading = true;
+
                         this.YAM_phone = res.YAM_phone
                         if(this.startInterval){
                             clearInterval(this.startInterval)
@@ -88,14 +93,20 @@
                         if(res.code == 200){
                             Toast('获取成功');
                             clearInterval(this.startInterval1)
+
+                            alert(res.data)
                             this.textarea = res.data
+
+                            clearInterval(this.startInterval1)
+
+
                         }else{
                             var myDate = new Date();
                             var mytime=myDate.toLocaleTimeString();
                             this.textarea = "最新状态码:" + res.msg + "当前时间" + mytime;
                         }
                     }))
-                }, 5000);
+                }, 10000);
             },
 
 
