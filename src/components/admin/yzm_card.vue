@@ -14,29 +14,30 @@
             </el-table-column>
             <el-table-column
                     label="手机号码"
-                    width="520">
+                    width="220">
                 <template slot-scope="scope">{{ scope.row.YAM_phone }}</template>
             </el-table-column>
             <el-table-column
                     label="状态"
-                    width="220">
+                    width="120">
                 <template slot-scope="scope">{{ scope.row.YAM_Status == 1 ? "正常" : "异常" }}</template>
             </el-table-column>
             <el-table-column
                     label="使用"
-                    width="220">
-                <template slot-scope="scope">{{ scope.row.Use == 0 ? "空闲" : "占用中" }}</template>
+                    width="120">
+                <template slot-scope="scope">{{ scope.row.Use == 1 ? "空闲" : "锁定" }}</template>
             </el-table-column>
             <el-table-column
                     label="使用"
-                    width="520">
+                    width="220">
                 <template slot-scope="scope">{{ scope.row.YAM_time}}</template>
             </el-table-column>
         </el-table>
         <el-pagination @size-change="handleSizeChange"
                        @current-change="handleCurrentChange"
                        :current-page="currentPage"
-                       :page-size="PageSize" layout="total, sizes, prev, pager, next, jumper"
+                       :page-size="PageSize"
+                       layout="total, sizes, prev, pager, next, jumper"
                        :total="totalCount">
         </el-pagination>
 <!--        <div style="margin-top: 20px">-->
@@ -57,12 +58,13 @@
                 // 总条数，根据接口获取数据长度(注意：这里不能为空)
                 totalCount:null,
                 // 个数选择器（可修改）
-                pageSizes:[1,2,3,4],
+                pageSizes:[100,200,300,4000],
                 // 默认每页显示的条数（可修改）
-                PageSize:10,
+                PageSize:10000,
                 multipleSelection: [],
                 search:null,
-                removedata:null
+                removedata:null,
+
             }
         },
         mounted() {

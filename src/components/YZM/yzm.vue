@@ -90,12 +90,8 @@
                             clearInterval(this.startInterval1)
                             this.textarea = res.data
                         }else{
-
                             var myDate = new Date();
-
                             var mytime=myDate.toLocaleTimeString();
-
-
                             this.textarea = "最新状态码:" + res.msg + "当前时间" + mytime;
                         }
                     }))
