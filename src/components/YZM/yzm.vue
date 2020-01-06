@@ -1,31 +1,55 @@
 <template>
     <div style="width: 100vw">
-        <van-search v-model="value" placeholder="请输入授权码" show-action shape="round">
-            <div slot="action" @click="getNubber">获取号码</div>
-        </van-search>
-        <div style="height: 20px"></div>
-        <el-card class="box-card">
-            <div class="text item">
-<!--                <el-select v-model="value" placeholder="请选择" style="width: 90vw">-->
-<!--                    <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>-->
-<!--                </el-select>-->
-                <div style="height: 20px"></div>
-                <el-input style="width: 90vw" v-model="YAM_phone" placeholder="手机号"></el-input>
-                <div style="height: 20px"></div>
-                <el-button round style="width: 90vw" @click="GetYzm2Str">点击获取验证码</el-button>
-            </div>
-        </el-card>
-        <div style="height: 20px"></div>
-        <textarea style="height: 200px;width: 99vw;margin: 0 auto"
-                placeholder="接收验证码短信："
-                v-model="textarea">
+
+
+        <div v-if="!show">
+            <el-card class="box-card">
+                <div class="text item">
+                    <!--                <el-select v-model="value" placeholder="请选择" style="width: 90vw">-->
+                    <!--                    <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>-->
+                    <!--                </el-select>-->
+                    <div style="height: 20px"></div>
+                    <el-input style="width: 90vw" v-model="YAM_phone" placeholder="手机号"></el-input>
+                    <div style="height: 20px"></div>
+                    <el-button round style="width: 90vw" @click="GetYzm2Str">点击获取验证码</el-button>
+                </div>
+            </el-card>
+            <div style="height: 20px"></div>
+            <textarea style="height: 200px;width: 99vw;margin: 0 auto;border: none"
+                      :placeholder="placeholder"
+                      v-model="textarea">
         </textarea>
+        </div>
+
+
+
+
+
+        <van-popup :close-on-click-overlay="false" v-model="show">
+            <div style="width: 100vw;">
+
+                <van-cell-group>
+                    <van-field
+                            v-model="value"
+                            center
+                            clearable
+                            label="输入授权码"
+                            placeholder="请前往商家购买优惠账号"
+                    >
+                        <van-button  @click="getNubber" slot="button" size="small" type="primary">验证</van-button>
+                    </van-field>
+                </van-cell-group>
+            </div>
+        </van-popup>
+
     </div>
 </template>
 
 <script>
     import { GetHM2Str , binding , GetYzm2Str} from '../../api/apilist'
     import { Toast } from 'vant';
+    import { Notify } from 'vant';
+
     export default {
         name: "yzm",
         data(){
@@ -36,9 +60,11 @@
                 }],
                 textarea: '',
                 YAM_phone:"",
-                value:599940,
+                value:'',
                 startInterval:null,
-                startInterval1:null
+                startInterval1:null,
+                show:true,
+                placeholder:""
             }
         },
         methods:{
@@ -48,14 +74,12 @@
                 }, 5000);
             },
             async getNubber(){
-
-
                 window.clearInterval(this.startInterval1)
                 //检测token是否正确
                 GetHM2Str({token:this.value}).then((res=>{
                     if(res.code == 200){
-                        Toast('获取成功');
-
+                        this.show = false
+                        Toast(`${res.msg}，剩余${res.frequency}次机会`);
                         this.fullscreenLoading = true;
 
                         this.YAM_phone = res.YAM_phone
@@ -66,7 +90,7 @@
                             this.app()
                         }
                     }else{
-                        alert(res.msg)
+                        Notify(res.msg);
                     }
                 }))
             },
@@ -75,6 +99,7 @@
                 GetHM2Str({token:this.value}).then((res=>{
                     if(res.code == 200){
                         Toast('验证码获取中,请稍后');
+                        this.placeholder = "验证码获取中,请稍后"
                         if(this.startInterval1){
                             clearInterval(this.startInterval1)
                             this.app1()
@@ -101,9 +126,7 @@
 
 
                         }else{
-                            var myDate = new Date();
-                            var mytime=myDate.toLocaleTimeString();
-                            this.textarea = "最新状态码:" + res.msg + "当前时间" + mytime;
+                            this.textarea = "正在获取验证码中";
                         }
                     }))
                 }, 10000);

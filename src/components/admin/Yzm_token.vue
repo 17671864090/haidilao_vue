@@ -19,7 +19,7 @@
                     tableXing: '',
                     date:[],
                 },
-                data:'', //店铺
+                data:null, //店铺
 
             }
         },
@@ -29,15 +29,12 @@
         methods:{
             async AddSubmit(){
                 await addYZMCODE().then((res=> {
-                    this.$alert(res.data.Authorizationcode, '授权码获取成功', {
-                        confirmButtonText: '确定',
-                        center: true,
-                        callback: () => {
-                            this.$message({
-                                type: 'success',
-                                message: `生成成功`
-                            });
-                        }
+                    this.data = ''
+                    for (let i=0;i<res.data.length;i++){
+                        this.data += `${res.data[i].Authorizationcode.toString()}<br/>`
+                    }
+                    this.$alert(`${this.data}`, '授权码获取成功', {
+                        dangerouslyUseHTMLString: true
                     });
                 }))
             }

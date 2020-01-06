@@ -53,7 +53,7 @@
                                 <router-link to="/admins/yzm_card">获取当前可用号码</router-link>
                             </el-menu-item>
                             <el-menu-item index="3-2">
-                                <router-link to="/admins/addYzm_card">添加号码</router-link>
+                                <router-link to="/admins/addYzm_card">添加号码 监控</router-link>
                             </el-menu-item>
                             <el-menu-item index="3-3">
                                 <router-link to="/admins/Yzm_token">添加授权码</router-link>
